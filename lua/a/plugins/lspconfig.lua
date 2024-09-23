@@ -9,7 +9,7 @@ return {
         local nvim_lsp = require("lspconfig")
         local mason_lspconfig = require("mason-lspconfig")
 
-        local protocol = require("vim.lsp.protocol")
+        -- local protocol = require("vim.lsp.protocol")
 
         local on_attach = function(client, bufnr)
             -- format on save
@@ -51,16 +51,6 @@ return {
                 })
             end,
             ["rust_analyzer"] = function ()
-                nvim_lsp['rust-analyzer'].setup({
-                    settings = {
-                        check = {
-                            command = "clippy";
-                        },
-                        diagnostics = {
-                            enable = true;
-                        }
-                    }
-                })
             end
         })
     end,

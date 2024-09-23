@@ -14,6 +14,11 @@ return {
                     -- icon = "",
                     color = "#cf8828",
                     name = "Rust"
+                },
+                ["toml"] = {
+                    icon = "ﬧ", -- ""
+                    color = "#43e0f1",
+                    name = "TOML"
                 }
             };
         })
