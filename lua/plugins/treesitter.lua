@@ -4,10 +4,17 @@ return {
     build = ":TSUpdate",
     dependencies = {
         "windwp/nvim-ts-autotag",
+        "JoosepAlviste/nvim-ts-context-commentstring"
     },
     config = function()
         local treesitter = require("nvim-treesitter.configs")
+        -- Disable deprecated context_commentstring module
+        vim.g.skip_ts_context_commentstring_module = true
 
+        -- Setup ts_context_commentstring
+        require('ts_context_commentstring').setup({
+            enable_autocmd = false -- Disable automatic comment context updates, optional
+        })
         treesitter.setup({
             modules = {
                 "rust",
@@ -54,16 +61,12 @@ return {
                     node_decremental = "<bs>",
                 },
             },
-            rainbow = {
-                enable = true,
-                disable = {},
-                extended_mode = true,
-                max_file_lines = 10000,
-            },
-            context_commentstring = {
-                enable = true,
-                enable_autocmd = false,
-            },
+            -- rainbow = {
+            --     enable = true,
+            --     disable = {},
+            --     extended_mode = true,
+            --     max_file_lines = 10000,
+            -- },
         })
     end,
 }
