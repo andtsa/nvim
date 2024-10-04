@@ -1,19 +1,19 @@
--- keyboard mappings 
+-- keyboard mappings
 
 vim.g.mapleader = "`"
 
 -- Documentation
 -----------------------------------------------------------------------------------
 -- vim.keymap.set(
---     "n", -- the mode for the shortcut to exist in, 
---          --     "n":normal, 
---          --     "i":insert, 
---          --     "x":visual, 
---          --     "s":select, 
---          --     "v":either visual or select, 
---          --     "c":command line mode (ie when typing with `:`), 
---          --     "t":terminal mode, in the `:terminal`, 
---          --     "":empty string is all modes. 
+--     "n", -- the mode for the shortcut to exist in,
+--          --     "n":normal,
+--          --     "i":insert,
+--          --     "x":visual,
+--          --     "s":select,
+--          --     "v":either visual or select,
+--          --     "c":command line mode (ie when typing with `:`),
+--          --     "t":terminal mode, in the `:terminal`,
+--          --     "":empty string is all modes.
 --          -- You can specify multiple modes using a table {"n", "i"}.
 --     shortcut: "", -- the shortcut u wanna map to something
 --     target: "", -- the thing u wanna do when the shortcut happens
@@ -64,6 +64,7 @@ vim.keymap.set("", "<ScrollWheelRight>", "<Right>", { noremap = true, silent = t
 vim.keymap.set("n", "<leader>]", "<C-w>l", { noremap = true, unique = true })
 vim.keymap.set("n", "<leader>[", "<C-w>h", { noremap = true, unique = true })
 
+vim.keymap.set("n", "tt", "<cmd>terminal<CR>", { noremap = true, unique = true })
 
 -- plugin specific stuff
 ------------------------------------------------------------------------------------
