@@ -64,7 +64,18 @@ vim.keymap.set("", "<ScrollWheelRight>", "<Right>", { noremap = true, silent = t
 vim.keymap.set("n", "<leader>]", "<C-w>l", { noremap = true, unique = true })
 vim.keymap.set("n", "<leader>[", "<C-w>h", { noremap = true, unique = true })
 
+-- moving between split
+
+vim.keymap.set("n", "<leader>=", "<C-w>k", { noremap = true, unique = true })
+vim.keymap.set("n", "<leader>\\", "<C-w>j", { noremap = true, unique = true })
+
 vim.keymap.set("n", "tt", "<cmd>terminal<CR>", { noremap = true, unique = true })
+
+vim.keymap.set("n", "<leader>ss", "<cmd>split<CR>", { noremap = true, unique = true })
+
+-- create terminal below
+vim.keymap.set("n", "T", "<cmd>split<CR><cmd>terminal<CR>8<C-W>_a",
+    { noremap = true, unique = true, desc = "open terminal below" })
 
 -- plugin specific stuff
 ------------------------------------------------------------------------------------
@@ -113,3 +124,18 @@ vim.keymap.set(
     end,
     { silent = false, unique = true, noremap = true, desc = "Rust analyzer (?)", buffer = vim.api.nvim_get_current_buf() }
 )
+
+-- nabla.nvim -----------------------------------------------
+
+-- vim.cmd(
+--     "nnoremap <leader>p :lua require(\"nabla\").popup()<CR> \" Customize with popup({border = ...})  : `single` (default), `double`, `rounded`"
+-- )
+
+-- vim.keymap.set("n", "<leader>p", function()
+--     require("nabla").toggle_virt({
+--         autogen = true, -- auto-regenerate ASCII art when exiting insert mode
+--         silent = false, -- silents error messages
+--         align_center = true,
+--     })
+-- end, { noremap = true, unique = true })
+--
