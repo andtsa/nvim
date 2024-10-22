@@ -16,7 +16,7 @@ return {
             max_file_size = 5.0,
             -- Milliseconds that must pass before updating marks, updates occur
             -- within the context of the visible window, not the entire buffer
-            debounce = 100,
+            debounce = 300,
             -- Pre configured settings that will attempt to mimic various target
             -- user experiences. Any user provided settings will take precedence.
             --  obsidian: mimic Obsidian UI
@@ -100,7 +100,7 @@ return {
                 icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' },
                 -- Added to the sign column if enabled
                 -- The 'level' is used to index into the list using a cycle
-                signs = { '󰫎 ' },
+                signs = { '' },
                 -- Width of the heading background:
                 --  block: width of the heading text
                 --  full:  full width of the window
@@ -126,7 +126,7 @@ return {
                 -- Determins if a border is added above and below headings
                 border = true,
                 -- Alway use virtual lines for heading borders instead of attempting to use empty lines
-                border_virtual = false,
+                border_virtual = true,
                 -- Highlight the start of the border using the foreground highlight
                 border_prefix = false,
                 -- Used above heading for border
@@ -159,7 +159,7 @@ return {
                 enabled = true,
                 -- Amount of margin to add to the left of paragraphs
                 -- If a floating point value < 1 is provided it is treated as a percentage of the available window space
-                left_margin = 0,
+                left_margin = 1,
                 -- Minimum width to use for paragraphs
                 min_width = 0,
             },
@@ -177,7 +177,7 @@ return {
                 -- Determines where language icon is rendered:
                 --  right: right side of code block
                 --  left:  left side of code block
-                position = 'left',
+                position = 'right',
                 -- Amount of padding to add around the language
                 -- If a floating point value < 1 is provided it is treated as a percentage of the available window space
                 language_pad = 0,
@@ -239,9 +239,9 @@ return {
                 -- If the item is a 'checkbox' a conceal is used to hide the bullet instead
                 icons = { '●', '○', '◆', '◇' },
                 -- Padding to add to the left of bullet point
-                left_pad = 0,
+                left_pad = 1,
                 -- Padding to add to the right of bullet point
-                right_pad = 0,
+                right_pad = 1,
                 -- Highlight for the bullet icon
                 highlight = 'RenderMarkdownBullet',
             },
@@ -256,7 +256,7 @@ return {
                 position = 'inline',
                 unchecked = {
                     -- Replaces '[ ]' of 'task_list_marker_unchecked'
-                    icon = '󰄱 ',
+                    icon = '',
                     -- Highlight for the unchecked icon
                     highlight = 'RenderMarkdownUnchecked',
                     -- Highlight for item associated with unchecked checkbox
@@ -264,7 +264,7 @@ return {
                 },
                 checked = {
                     -- Replaces '[x]' of 'task_list_marker_checked'
-                    icon = '󰱒 ',
+                    icon = '',
                     -- Highligh for the checked icon
                     highlight = 'RenderMarkdownChecked',
                     -- Highlight for item associated with checked checkbox
@@ -346,48 +346,48 @@ return {
             --   'highlight':  Highlight for the 'rendered' text and quote markers
             --   'quote_icon': Optional override for quote.icon value for individual callout
             callout = {
-                note = { raw = '[!NOTE]', rendered = '󰋽 Note', highlight = 'RenderMarkdownInfo' },
-                tip = { raw = '[!TIP]', rendered = '󰌶 Tip', highlight = 'RenderMarkdownSuccess' },
-                important = { raw = '[!IMPORTANT]', rendered = '󰅾 Important', highlight = 'RenderMarkdownHint' },
-                warning = { raw = '[!WARNING]', rendered = '󰀪 Warning', highlight = 'RenderMarkdownWarn' },
-                caution = { raw = '[!CAUTION]', rendered = '󰳦 Caution', highlight = 'RenderMarkdownError' },
+                note = { raw = '[!note]', rendered = '󰋽 Note', highlight = 'RenderMarkdownInfo' },
+                tip = { raw = '[!tip]', rendered = '󰌶 Tip', highlight = 'RenderMarkdownSuccess' },
+                important = { raw = '[!important]', rendered = '󰅾 Important', highlight = 'RenderMarkdownHint' },
+                warning = { raw = '[!warning]', rendered = '󰀪 Warning', highlight = 'RenderMarkdownWarn' },
+                caution = { raw = '[!caution]', rendered = '󰳦 Caution', highlight = 'RenderMarkdownError' },
                 -- Obsidian: https://help.obsidian.md/Editing+and+formatting/Callouts
-                abstract = { raw = '[!ABSTRACT]', rendered = '󰨸 Abstract', highlight = 'RenderMarkdownInfo' },
-                summary = { raw = '[!SUMMARY]', rendered = '󰨸 Summary', highlight = 'RenderMarkdownInfo' },
-                tldr = { raw = '[!TLDR]', rendered = '󰨸 Tldr', highlight = 'RenderMarkdownInfo' },
-                info = { raw = '[!INFO]', rendered = '󰋽 Info', highlight = 'RenderMarkdownInfo' },
-                todo = { raw = '[!TODO]', rendered = '󰗡 Todo', highlight = 'RenderMarkdownInfo' },
-                hint = { raw = '[!HINT]', rendered = '󰌶 Hint', highlight = 'RenderMarkdownSuccess' },
-                success = { raw = '[!SUCCESS]', rendered = '󰄬 Success', highlight = 'RenderMarkdownSuccess' },
-                check = { raw = '[!CHECK]', rendered = '󰄬 Check', highlight = 'RenderMarkdownSuccess' },
-                done = { raw = '[!DONE]', rendered = '󰄬 Done', highlight = 'RenderMarkdownSuccess' },
-                question = { raw = '[!QUESTION]', rendered = '󰘥 Question', highlight = 'RenderMarkdownWarn' },
-                help = { raw = '[!HELP]', rendered = '󰘥 Help', highlight = 'RenderMarkdownWarn' },
-                faq = { raw = '[!FAQ]', rendered = '󰘥 Faq', highlight = 'RenderMarkdownWarn' },
-                attention = { raw = '[!ATTENTION]', rendered = '󰀪 Attention', highlight = 'RenderMarkdownWarn' },
-                failure = { raw = '[!FAILURE]', rendered = '󰅖 Failure', highlight = 'RenderMarkdownError' },
-                fail = { raw = '[!FAIL]', rendered = '󰅖 Fail', highlight = 'RenderMarkdownError' },
-                missing = { raw = '[!MISSING]', rendered = '󰅖 Missing', highlight = 'RenderMarkdownError' },
-                danger = { raw = '[!DANGER]', rendered = '󱐌 Danger', highlight = 'RenderMarkdownError' },
-                error = { raw = '[!ERROR]', rendered = '󱐌 Error', highlight = 'RenderMarkdownError' },
-                bug = { raw = '[!BUG]', rendered = '󰨰 Bug', highlight = 'RenderMarkdownError' },
-                example = { raw = '[!EXAMPLE]', rendered = '󰉹 Example', highlight = 'RenderMarkdownHint' },
-                quote = { raw = '[!QUOTE]', rendered = '󱆨 Quote', highlight = 'RenderMarkdownQuote' },
-                cite = { raw = '[!CITE]', rendered = '󱆨 Cite', highlight = 'RenderMarkdownQuote' },
+                abstract = { raw = '[!abstract]', rendered = '󰨸 Abstract', highlight = 'RenderMarkdownInfo' },
+                summary = { raw = '[!summary]', rendered = '󰨸 Summary', highlight = 'RenderMarkdownInfo' },
+                tldr = { raw = '[!tldr]', rendered = '󰨸 Tldr', highlight = 'RenderMarkdownInfo' },
+                info = { raw = '[!info]', rendered = '󰋽 Info', highlight = 'RenderMarkdownInfo' },
+                todo = { raw = '[!todo]', rendered = '󰗡 Todo', highlight = 'RenderMarkdownInfo' },
+                hint = { raw = '[!hint]', rendered = '󰌶 Hint', highlight = 'RenderMarkdownSuccess' },
+                success = { raw = '[!success]', rendered = '󰄬 Success', highlight = 'RenderMarkdownSuccess' },
+                check = { raw = '[!check]', rendered = '󰄬 Check', highlight = 'RenderMarkdownSuccess' },
+                done = { raw = '[!done]', rendered = '󰄬 Done', highlight = 'RenderMarkdownSuccess' },
+                question = { raw = '[!question]', rendered = '󰘥 Question', highlight = 'RenderMarkdownWarn' },
+                help = { raw = '[!help]', rendered = '󰘥 Help', highlight = 'RenderMarkdownWarn' },
+                faq = { raw = '[!faq]', rendered = '󰘥 Faq', highlight = 'RenderMarkdownWarn' },
+                attention = { raw = '[!attention]', rendered = '󰀪 Attention', highlight = 'RenderMarkdownWarn' },
+                failure = { raw = '[!failure]', rendered = '󰅖 Failure', highlight = 'RenderMarkdownError' },
+                fail = { raw = '[!fail]', rendered = '󰅖 Fail', highlight = 'RenderMarkdownError' },
+                missing = { raw = '[!missing]', rendered = '󰅖 Missing', highlight = 'RenderMarkdownError' },
+                danger = { raw = '[!danger]', rendered = '󱐌 Danger', highlight = 'RenderMarkdownError' },
+                error = { raw = '[!error]', rendered = '󱐌 Error', highlight = 'RenderMarkdownError' },
+                bug = { raw = '[!bug]', rendered = '󰨰 Bug', highlight = 'RenderMarkdownError' },
+                example = { raw = '[!example]', rendered = '󰉹 Example', highlight = 'RenderMarkdownHint' },
+                quote = { raw = '[!quote]', rendered = '󱆨 Quote', highlight = 'RenderMarkdownQuote' },
+                cite = { raw = '[!cite]', rendered = '󱆨 Cite', highlight = 'RenderMarkdownQuote' },
             },
             link = {
                 -- Turn on / off inline link icon rendering
                 enabled = true,
                 -- Inlined with 'image' elements
-                image = '󰥶 ',
+                image = '',
                 -- Inlined with 'email_autolink' elements
-                email = '󰀓 ',
+                email = '',
                 -- Fallback icon for 'inline_link' elements
-                hyperlink = '󰌹 ',
+                hyperlink = '',
                 -- Applies to the fallback inlined icon
                 highlight = 'RenderMarkdownLink',
                 -- Applies to WikiLink elements
-                wiki = { icon = '󱗖 ', highlight = 'RenderMarkdownWikiLink' },
+                wiki = { icon = '', highlight = 'RenderMarkdownWikiLink' },
                 -- Define custom destination patterns so icons can quickly inform you of what a link
                 -- contains. Applies to 'inline_link' and wikilink nodes.
                 -- Can specify as many additional values as you like following the 'web' pattern below
@@ -396,7 +396,7 @@ return {
                 --   'icon':      Gets inlined before the link text
                 --   'highlight': Highlight for the 'icon'
                 custom = {
-                    web = { pattern = '^http[s]?://', icon = '󰖟 ', highlight = 'RenderMarkdownLink' },
+                    web = { pattern = '^http[s]?://', icon = '', highlight = 'RenderMarkdownLink' },
                 },
             },
             sign = {

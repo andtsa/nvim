@@ -1,4 +1,4 @@
--- keyboard mappings
+-- keyboard mapping, desc = ""s
 
 vim.g.mapleader = "`"
 
@@ -32,19 +32,27 @@ vim.g.mapleader = "`"
 -----------------------------------------------------------------------------------
 
 -- copy to system clipboard
-vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = false })
+vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = false, desc = "yank to system clipboard" })
 
+-- paste in insert mode
+vim.keymap.set("i", "<C-'>", "<C-r>\"", { noremap = true, silent = false, desc = "paste in insert mode" })
 
 -- clear search highlights
-vim.keymap.set("n", "<leader>q", ":nohl<CR>", { noremap = true, unique = true, desc = "clear search highlights" })
+vim.keymap.set("n", "<leader>q", "<cmd>nohl<CR>", { noremap = true, unique = true, desc = "clear search highlights" })
 
 
 -- disable recording
 vim.keymap.set("n", "q", "<Nop>")
 
 -- open diagnostic in float
-vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { noremap = true, unique = true, desc = "view diagnostics" })
 
+-- exit terminal with esc
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true, unique = true, desc = "exit terminal mode" })
+
+-- wrap text
+vim.keymap.set("n", "<leader>wy", "<cmd>set wrap<CR>", { noremap = true, unique = true, desc = "turn on text wrap" })
+vim.keymap.set("n", "<leader>wn", "<cmd>set nowrap<CR>", { noremap = true, unique = true, desc = "turn off text wrap" })
 
 -- use natural wheel scrolling
 ------------------------------
@@ -61,20 +69,21 @@ vim.keymap.set("", "<ScrollWheelRight>", "<Right>", { noremap = true, silent = t
 -----------------------------------------------------------------------------------
 
 -- moving between vsplit
-vim.keymap.set("n", "<leader>]", "<C-w>l", { noremap = true, unique = true })
-vim.keymap.set("n", "<leader>[", "<C-w>h", { noremap = true, unique = true })
+vim.keymap.set("n", "<leader>]", "<C-w>l", { noremap = true, unique = true, desc = "switch to right window" })
+vim.keymap.set("n", "<leader>[", "<C-w>h", { noremap = true, unique = true, desc = "switch to left window" })
 
 -- moving between split
 
-vim.keymap.set("n", "<leader>=", "<C-w>k", { noremap = true, unique = true })
-vim.keymap.set("n", "<leader>\\", "<C-w>j", { noremap = true, unique = true })
+vim.keymap.set("n", "<leader>=", "<C-w>k", { noremap = true, unique = true, desc = "switch to up window" })
+vim.keymap.set("n", "<leader>\\", "<C-w>j", { noremap = true, unique = true, desc = "switch to down window" })
 
-vim.keymap.set("n", "tt", "<cmd>terminal<CR>", { noremap = true, unique = true })
+vim.keymap.set("n", "tt", "<cmd>terminal<CR>", { noremap = true, unique = true, desc = "make current window a terminal" })
 
-vim.keymap.set("n", "<leader>ss", "<cmd>split<CR>", { noremap = true, unique = true })
+vim.keymap.set("n", "<leader>ss", "<cmd>split<CR>",
+    { noremap = true, unique = true, desc = "split current window into top & bottom" })
 
 -- create terminal below
-vim.keymap.set("n", "T", "<cmd>split<CR><cmd>terminal<CR>8<C-W>_a",
+vim.keymap.set("n", "<leader>T", "<cmd>split<CR><cmd>terminal<CR>8<C-W>_a",
     { noremap = true, unique = true, desc = "open terminal below" })
 
 -- plugin specific stuff
@@ -82,20 +91,21 @@ vim.keymap.set("n", "T", "<cmd>split<CR><cmd>terminal<CR>8<C-W>_a",
 
 -- colourcodes.lua ------------------------------------------
 -- disabling colouring of hex codes
-vim.keymap.set("n", "<leader>e", "<cmd>ColorizerToggle<CR>", { noremap = true, unique = true, silent = false })
+vim.keymap.set("n", "<leader>e", "<cmd>ColorizerToggle<CR>",
+    { noremap = true, unique = true, silent = false, desc = "toggle inline colour highlights" })
 
 -- cmp.lua --------------------------------------------------
 -- Function to enable completions
 vim.keymap.set('n', '<leader>c', function()
     vim.o.completeopt = "menuone,noinsert,noselect"
     vim.cmd('echo "Completions enabled"')
-end, { noremap = true, silent = false, unique = true })
+end, { noremap = true, silent = false, unique = true, desc = "enable completions" })
 
 -- Function to disable completions
 vim.keymap.set('n', '<leader>x', function()
     vim.o.completeopt = "menuone,noselect"
     vim.cmd('echo "Completions disabled"')
-end, { noremap = true, silent = false, unique = true })
+end, { noremap = true, silent = false, unique = true, desc = "disable completions" })
 
 
 -- inlayhints.lua -------------------------------------------
