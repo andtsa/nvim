@@ -37,6 +37,11 @@ vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = false, desc =
 -- paste in insert mode
 vim.keymap.set("i", "<C-'>", "<C-r>\"", { noremap = true, silent = false, desc = "paste in insert mode" })
 
+-- move around in insert mode
+vim.keymap.set("i", "<C-]>", "<C-o>$", { noremap = true, silent = false, desc = "$ in insert mode" })
+-- \/ this one for some reason doesn't let me leave insert mode... investigate later
+-- vim.keymap.set("i", "<C-[>", "<C-o>0", { noremap = true, silent = false, desc = "0 in insert mode" })
+
 -- clear search highlights
 vim.keymap.set("n", "<leader>q", "<cmd>nohl<CR>", { noremap = true, unique = true, desc = "clear search highlights" })
 
@@ -51,7 +56,7 @@ vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { noremap = true, un
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true, unique = true, desc = "exit terminal mode" })
 
 -- wrap text
-vim.keymap.set("n", "<leader>wy", "<cmd>set wrap<CR>", { noremap = true, unique = true, desc = "turn on text wrap" })
+vim.keymap.set("n", "<leader>ww", "<cmd>set wrap<CR>", { noremap = true, unique = true, desc = "turn on text wrap" })
 vim.keymap.set("n", "<leader>wn", "<cmd>set nowrap<CR>", { noremap = true, unique = true, desc = "turn off text wrap" })
 
 -- use natural wheel scrolling
@@ -77,9 +82,13 @@ vim.keymap.set("n", "<leader>[", "<C-w>h", { noremap = true, unique = true, desc
 vim.keymap.set("n", "<leader>=", "<C-w>k", { noremap = true, unique = true, desc = "switch to up window" })
 vim.keymap.set("n", "<leader>\\", "<C-w>j", { noremap = true, unique = true, desc = "switch to down window" })
 
+-- open terminal in current window
 vim.keymap.set("n", "tt", "<cmd>terminal<CR>", { noremap = true, unique = true, desc = "make current window a terminal" })
 
+-- split into top n bottom
 vim.keymap.set("n", "<leader>ss", "<cmd>split<CR>",
+    { noremap = true, unique = true, desc = "split current window into top & bottom" })
+vim.keymap.set("n", "<leader>sd", "<cmd>split<CR>",
     { noremap = true, unique = true, desc = "split current window into top & bottom" })
 
 -- create terminal below

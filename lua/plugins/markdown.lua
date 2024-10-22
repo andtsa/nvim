@@ -47,7 +47,7 @@ return {
             },
             -- Vim modes that will show a rendered view of the markdown file
             -- All other modes will be uneffected by this plugin
-            render_modes = { 'n', 'c' },
+            render_modes = { 'n', 'c', 'i', 'v' },
             anti_conceal = {
                 -- This enables hiding any added text on the line the cursor is on
                 enabled = true,
@@ -63,7 +63,7 @@ return {
                 -- Number of lines above cursor to show
                 above = 0,
                 -- Number of lines below cursor to show
-                below = 0,
+                below = 1,
             },
             padding = {
                 -- Highlight to use when adding whitespace, should match background
