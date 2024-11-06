@@ -16,7 +16,7 @@ return {
             max_file_size = 5.0,
             -- Milliseconds that must pass before updating marks, updates occur
             -- within the context of the visible window, not the entire buffer
-            debounce = 300,
+            debounce = 100,
             -- Pre configured settings that will attempt to mimic various target
             -- user experiences. Any user provided settings will take precedence.
             --  obsidian: mimic Obsidian UI
@@ -25,8 +25,8 @@ return {
             preset = 'obsidian',
             -- The level of logs to write to file: vim.fn.stdpath('state') .. '/render-markdown.log'
             -- Only intended to be used for plugin development / debugging
-            log_level = 'error',
-            -- Print runtime of main update method
+            log_level = 'warning',
+
             -- Only intended to be used for plugin development / debugging
             log_runtime = false,
             -- Filetypes this plugin will run on
@@ -63,7 +63,7 @@ return {
                 -- Number of lines above cursor to show
                 above = 0,
                 -- Number of lines below cursor to show
-                below = 1,
+                below = 0,
             },
             padding = {
                 -- Highlight to use when adding whitespace, should match background
@@ -71,15 +71,15 @@ return {
             },
             latex = {
                 -- Whether LaTeX should be rendered, mainly used for health check
-                enabled = true,
-                -- Executable used to convert latex formula to rendered unicode
-                converter = 'latex2text',
-                -- Highlight for LaTeX blocks
-                highlight = 'RenderMarkdownMath',
-                -- Amount of empty lines above LaTeX blocks
-                top_pad = 0,
-                -- Amount of empty lines below LaTeX blocks
-                bottom_pad = 0,
+                enabled = false,
+                -- -- Executable used to convert latex formula to rendered unicode
+                -- converter = 'latex2text',
+                -- -- Highlight for LaTeX blocks
+                -- highlight = 'RenderMarkdownMath',
+                -- -- Amount of empty lines above LaTeX blocks
+                -- top_pad = 1,
+                -- -- Amount of empty lines below LaTeX blocks
+                -- bottom_pad = 0,
             },
             on = {
                 -- Called when plugin initially attaches to a buffer
@@ -185,7 +185,7 @@ return {
                 language_name = true,
                 -- A list of language names for which background highlighting will be disabled
                 -- Likely because that language has background highlights itself
-                disable_background = { 'diff' },
+                disable_background = {},
                 -- Width of the code block background:
                 --  block: width of the code block
                 --  full:  full width of the window
@@ -196,10 +196,10 @@ return {
                 left_margin = 0,
                 -- Amount of padding to add to the left of code blocks
                 -- If a floating point value < 1 is provided it is treated as a percentage of the available window space
-                left_pad = 0,
+                left_pad = 1,
                 -- Amount of padding to add to the right of code blocks when width is 'block'
                 -- If a floating point value < 1 is provided it is treated as a percentage of the available window space
-                right_pad = 0,
+                right_pad = 1,
                 -- Minimum width to use for code blocks when width is 'block'
                 min_width = 0,
                 -- Determins how the top / bottom of code block are rendered:
@@ -256,7 +256,7 @@ return {
                 position = 'inline',
                 unchecked = {
                     -- Replaces '[ ]' of 'task_list_marker_unchecked'
-                    icon = '',
+                    icon = ' ',
                     -- Highlight for the unchecked icon
                     highlight = 'RenderMarkdownUnchecked',
                     -- Highlight for item associated with unchecked checkbox
@@ -264,7 +264,7 @@ return {
                 },
                 checked = {
                     -- Replaces '[x]' of 'task_list_marker_checked'
-                    icon = '',
+                    icon = ' ',
                     -- Highligh for the checked icon
                     highlight = 'RenderMarkdownChecked',
                     -- Highlight for item associated with checked checkbox
@@ -279,7 +279,7 @@ return {
                 --   'highlight':       Highlight for the 'rendered' icon
                 --   'scope_highlight': Highlight for item associated with custom checkbox
                 custom = {
-                    todo = { raw = '[-]', rendered = '󰥔 ', highlight = 'RenderMarkdownTodo', scope_highlight = nil },
+                    todo = { raw = '[+]', rendered = ' ', highlight = 'RenderMarkdownTodo', scope_highlight = nil },
                 },
             },
             quote = {
@@ -379,15 +379,15 @@ return {
                 -- Turn on / off inline link icon rendering
                 enabled = true,
                 -- Inlined with 'image' elements
-                image = '',
+                image = ' ',
                 -- Inlined with 'email_autolink' elements
-                email = '',
+                email = ' ',
                 -- Fallback icon for 'inline_link' elements
-                hyperlink = '',
+                hyperlink = ' ',
                 -- Applies to the fallback inlined icon
                 highlight = 'RenderMarkdownLink',
                 -- Applies to WikiLink elements
-                wiki = { icon = '', highlight = 'RenderMarkdownWikiLink' },
+                wiki = { icon = ' ', highlight = 'RenderMarkdownWikiLink' },
                 -- Define custom destination patterns so icons can quickly inform you of what a link
                 -- contains. Applies to 'inline_link' and wikilink nodes.
                 -- Can specify as many additional values as you like following the 'web' pattern below
@@ -425,7 +425,7 @@ return {
                     -- Used when not being rendered, get user setting
                     default = vim.api.nvim_get_option_value('conceallevel', {}),
                     -- Used when being rendered, concealed text is completely hidden
-                    rendered = 3,
+                    rendered = 2,
                 },
                 -- See :h 'concealcursor'
                 concealcursor = {

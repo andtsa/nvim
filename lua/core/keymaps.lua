@@ -43,7 +43,7 @@ vim.keymap.set("i", "<C-]>", "<C-o>$", { noremap = true, silent = false, desc = 
 -- vim.keymap.set("i", "<C-[>", "<C-o>0", { noremap = true, silent = false, desc = "0 in insert mode" })
 
 -- clear search highlights
-vim.keymap.set("n", "<leader>q", "<cmd>nohl<CR>", { noremap = true, unique = true, desc = "clear search highlights" })
+vim.keymap.set("n", "qs", "<cmd>nohl<CR>", { noremap = true, unique = true, desc = "clear search highlights" })
 
 
 -- disable recording
@@ -91,9 +91,17 @@ vim.keymap.set("n", "<leader>ss", "<cmd>split<CR>",
 vim.keymap.set("n", "<leader>sd", "<cmd>split<CR>",
     { noremap = true, unique = true, desc = "split current window into top & bottom" })
 
+-- split vertically
+vim.keymap.set("n", "<leader>vs", "<cmd>vs<CR>",
+    { noremap = true, unique = true, desc = "split current window into left & right" })
+
+
 -- create terminal below
+vim.keymap.set("n", "<leader>td", "<cmd>split<CR><cmd>terminal<CR>8<C-W>_a",
+    { noremap = true, unique = true, desc = "open terminal below" })
 vim.keymap.set("n", "<leader>T", "<cmd>split<CR><cmd>terminal<CR>8<C-W>_a",
     { noremap = true, unique = true, desc = "open terminal below" })
+
 
 -- plugin specific stuff
 ------------------------------------------------------------------------------------
@@ -146,15 +154,16 @@ vim.keymap.set(
 
 -- nabla.nvim -----------------------------------------------
 
--- vim.cmd(
---     "nnoremap <leader>p :lua require(\"nabla\").popup()<CR> \" Customize with popup({border = ...})  : `single` (default), `double`, `rounded`"
--- )
+vim.keymap.set("n", "<leader>np", function()
+    require("nabla").popup({
+        border = "rounded" -- Customize border style: `single`, `double`, or `rounded`
+    })
+end, { noremap = true, unique = true, desc = "popup mathjax preview (for expr under cursor)" })
 
--- vim.keymap.set("n", "<leader>p", function()
---     require("nabla").toggle_virt({
---         autogen = true, -- auto-regenerate ASCII art when exiting insert mode
---         silent = false, -- silents error messages
---         align_center = true,
---     })
--- end, { noremap = true, unique = true })
---
+vim.keymap.set("n", "<leader>ni", function()
+    require("nabla").toggle_virt({
+        autogen = true, -- auto-regenerate ASCII art when exiting insert mode
+        silent = false, -- silents error messages
+        align_center = false,
+    })
+end, { noremap = true, unique = true, desc = "toggle inline mathjax preview" })

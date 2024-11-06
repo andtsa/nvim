@@ -7,9 +7,5 @@ return {
         "mfussenegger/nvim-dap",
         event = "BufReadPre"
     },
-    {
-        "jbyuki/nabla.nvim",
-        event = "BufReadPost"
-    },
+    -- "dstein64/vim-startuptime",
 }
-

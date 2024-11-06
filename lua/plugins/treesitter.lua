@@ -20,7 +20,8 @@ return {
                 "rust",
                 "html",
                 "javascript",
-                "lua"
+                "lua",
+                "markdown"
             },
             highlight = {
                 enable = true,
