@@ -25,7 +25,7 @@ return {
             preset = 'obsidian',
             -- The level of logs to write to file: vim.fn.stdpath('state') .. '/render-markdown.log'
             -- Only intended to be used for plugin development / debugging
-            log_level = 'warning',
+            log_level = 'info',
 
             -- Only intended to be used for plugin development / debugging
             log_runtime = false,

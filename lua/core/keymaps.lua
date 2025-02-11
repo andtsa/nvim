@@ -102,6 +102,60 @@ vim.keymap.set("n", "<leader>td", "<cmd>split<CR><cmd>terminal<CR>8<C-W>_a",
 vim.keymap.set("n", "<leader>T", "<cmd>split<CR><cmd>terminal<CR>8<C-W>_a",
     { noremap = true, unique = true, desc = "open terminal below" })
 
+-- reload current file
+vim.keymap.set(
+    "n",
+    "<leader>rf",
+    "<cmd>w<CR><cmd>e %<CR>",
+    {
+        silent = false,
+        noremap = true,
+        unique = true,
+        desc = "reload current file",
+    }
+)
+
+-- open current file with default application
+vim.keymap.set(
+    "n",
+    "<leader>O",
+    "<cmd>!open %<CR>",
+    {
+        unique = true,
+        noremap = true,
+        desc = "open current file with default application"
+    }
+)
+
+-- spellcheck
+vim.keymap.set(
+    "n",
+    "<leader>sc",
+    "<cmd>setlocal spell spelllang=en_gb<CR>",
+    { noremap = true, unique = true, desc = "enable spellchecking" }
+)
+
+vim.keymap.set(
+    "n",
+    "<leader>==",
+    "z=",
+    { noremap = true, unique = true, desc = "same as z=" }
+)
+
+vim.keymap.set(
+    "n",
+    "<leader>-",
+    "z=1",
+    { unique = true, noremap = true, desc = "get 1st spelling suggestion" }
+)
+
+-- open lsp documentation
+vim.keymap.set(
+    "n",
+    "<Tab>",
+    "<cmd>lua vim.lsp.buf.hover()<CR>",
+    { unique = true, noremap = true, desc = "view hover action" }
+)
 
 -- plugin specific stuff
 ------------------------------------------------------------------------------------
@@ -152,6 +206,19 @@ vim.keymap.set(
     { silent = false, unique = true, noremap = true, desc = "Rust analyzer (?)", buffer = vim.api.nvim_get_current_buf() }
 )
 
+-- rust, not plugin. run fmt
+vim.keymap.set(
+    "n",
+    "<leader>fmt",
+    "<cmd>w<CR><cmd>!/Users/andtsa/Automator/run/target/release/run fmt<CR><cmd>e %<CR>",
+    {
+        silent = false,
+        noremap = true,
+        unique = true,
+        desc = "run cargo fmt",
+    }
+)
+
 -- nabla.nvim -----------------------------------------------
 
 vim.keymap.set("n", "<leader>np", function()
@@ -167,3 +234,54 @@ vim.keymap.set("n", "<leader>ni", function()
         align_center = false,
     })
 end, { noremap = true, unique = true, desc = "toggle inline mathjax preview" })
+
+
+-- python shenanigans ---------------------------------------
+
+vim.keymap.set(
+    "n",
+    "<leader>pp",
+    "<cmd>w<CR><cmd>!python3 %<CR>",
+    { noremap = true, unique = true, desc = "python3 run the current file" }
+)
+
+
+-- typst.lua
+
+vim.keymap.set(
+    "n",
+    "<leader>tp<CR>",
+    "<cmd>TypstPreview<CR>",
+    { noremap = true, unique = true, desc = "start typst preview" }
+)
+vim.keymap.set(
+    "n",
+    "<leader>tp<Esc>",
+    "<cmd>TypstPreviewStop<CR>",
+    { noremap = true, unique = true, desc = "stop typst preview" }
+)
+
+
+-- -- haskell.lua
+-- 
+-- local ht = require('haskell-tools')
+-- local bufnr = vim.api.nvim_get_current_buf()
+-- -- haskell-language-server relies heavily on codeLenses,
+-- -- so auto-refresh (see advanced configuration) is enabled by default
+-- vim.keymap.set("n", '<space>cl', vim.lsp.codelens.run,
+--     { unique = true, noremap = true, silent = false, buffer = bufnr, desc = "open lsp code lens" })
+-- -- Hoogle search for the type signature of the definition under the cursor
+-- vim.keymap.set('n', '<leader>hs', ht.hoogle.hoogle_signature,
+--     { unique = true, noremap = true, silent = false, buffer = bufnr, desc = "hoogle search" })
+-- -- Evaluate all code snippets
+-- vim.keymap.set('n', '<leader>ra', ht.lsp.buf_eval_all,
+--     { unique = true, noremap = true, silent = false, buffer = bufnr, desc = "evaluate all code snippets" })
+-- -- Toggle a GHCi repl for the current package
+-- vim.keymap.set('n', '<leader>rr', ht.repl.toggle,
+--     { unique = true, noremap = true, silent = false, buffer = bufnr, desc = "toggle a ghci repl for current package" })
+-- -- Toggle a GHCi repl for the current buffer
+-- vim.keymap.set('n', '<leader>rb', function()
+--     ht.repl.toggle(vim.api.nvim_buf_get_name(0))
+-- end, { unique = true, noremap = true, silent = false, buffer = bufnr, desc = "toggle ghci repl for current buffer" })
+-- vim.keymap.set('n', '<leader>rq', ht.repl.quit,
+--     { unique = true, noremap = true, silent = false, buffer = bufnr, desc = "quit the ghci repl" })

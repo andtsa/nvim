@@ -20,6 +20,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
 })
 
+vim.api.nvim_create_autocmd("BufReadPre", {
+    pattern = "*.*",
+    callback = function()
+        vim.opt.linebreak = true
+        vim.opt.wrap = true
+    end
+})
+
 
 -- Enable inlay hints when the LSP attaches
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -34,3 +42,10 @@ vim.api.nvim_create_autocmd("BufReadPost", {
         vim.cmd("ColorizerAttachToBuffer")
     end
 })
+
+-- vim.api.nvim_create_autocmd('CursorHold', {
+--     pattern = '*.rs',
+--     callback = function()
+--         vim.lsp.buf.hover()
+--     end,
+-- })
