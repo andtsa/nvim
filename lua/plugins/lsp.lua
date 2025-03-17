@@ -6,6 +6,9 @@ return {
         { "folke/neodev.nvim", opts = {} },
     },
     config = function()
+        -- required before lspconfig
+        require('java').setup()
+
         local nvim_lsp = require("lspconfig")
         local mason_lspconfig = require("mason-lspconfig")
 
@@ -25,6 +28,8 @@ return {
         end
 
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+        nvim_lsp.jdtls.setup({})
 
         mason_lspconfig.setup_handlers({
             function(server)
@@ -50,7 +55,7 @@ return {
                     capabilities = capabilities,
                 })
             end,
-            ["rust_analyzer"] = function ()
+            ["rust_analyzer"] = function()
             end
         })
     end,

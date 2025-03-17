@@ -54,7 +54,7 @@ vim.opt.smartcase                      = true -- unless the query uses mixed cas
 -- Override the LSP hover handler to set a maximum width
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "rounded",
-    max_width = 80, -- Adjust this value as needed
+    max_width = 85, -- Adjust this value as needed
 })
 
 -- Override the LSP hover handler to disable text wrapping
@@ -79,3 +79,10 @@ end
 --
 -- -- Set the border colour for the hover window
 -- vim.api.nvim_command('autocmd ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335')
+
+-- enable completions by default
+vim.o.completeopt                      = "menuone,noinsert,noselect"
+
+
+-- instant configs
+vim.g.instant_username = "andt"

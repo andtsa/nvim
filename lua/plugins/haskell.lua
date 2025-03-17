@@ -19,13 +19,19 @@ return {
         vim.keymap.set('n', '<leader>ra', ht.lsp.buf_eval_all,
             { unique = true, noremap = true, silent = false, buffer = bufnr, desc = "evaluate all code snippets" })
         -- Toggle a GHCi repl for the current package
-        vim.keymap.set('n', '<leader>rr', ht.repl.toggle,
-            { unique = true, noremap = true, silent = false, buffer = bufnr, desc =
-            "toggle a ghci repl for current package" })
+        vim.keymap.set('n', '<leader>rp', ht.repl.toggle,
+            {
+                unique = true,
+                noremap = true,
+                silent = false,
+                buffer = bufnr,
+                desc =
+                "toggle a ghci repl for current package"
+            })
         -- Toggle a GHCi repl for the current buffer
         vim.keymap.set('n', '<leader>rb', function()
-            ht.repl.toggle(vim.api.nvim_buf_get_name(0))
-        end,
+                ht.repl.toggle(vim.api.nvim_buf_get_name(0))
+            end,
             { unique = true, noremap = true, silent = false, buffer = bufnr, desc = "toggle ghci repl for current buffer" })
         vim.keymap.set('n', '<leader>rq', ht.repl.quit,
             { unique = true, noremap = true, silent = false, buffer = bufnr, desc = "quit the ghci repl" })

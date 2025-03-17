@@ -159,7 +159,7 @@ return {
                 enabled = true,
                 -- Amount of margin to add to the left of paragraphs
                 -- If a floating point value < 1 is provided it is treated as a percentage of the available window space
-                left_margin = 1,
+                left_margin = 0,
                 -- Minimum width to use for paragraphs
                 min_width = 0,
             },
@@ -239,7 +239,7 @@ return {
                 -- If the item is a 'checkbox' a conceal is used to hide the bullet instead
                 icons = { '●', '○', '◆', '◇' },
                 -- Padding to add to the left of bullet point
-                left_pad = 1,
+                left_pad = 0,
                 -- Padding to add to the right of bullet point
                 right_pad = 1,
                 -- Highlight for the bullet icon

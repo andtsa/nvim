@@ -49,3 +49,12 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 --         vim.lsp.buf.hover()
 --     end,
 -- })
+--
+
+-- vim.cmd([[
+--   augroup HaskellConceal
+--     autocmd!
+--     autocmd FileType hs setlocal conceallevel=2
+--     autocmd FileType hs syntax match hsLambda "\\" conceal cchar=λ
+--   augroup END
+-- ]])

@@ -2,7 +2,7 @@ return {
     "scottmckendry/cyberdream.nvim",
     lazy = false,
     priority = 1000,
-    config = function ()
+    config = function()
         local cyber = require("cyberdream")
         cyber.setup({
             -- Enable transparent background
@@ -12,7 +12,7 @@ return {
             -- Replace all fillchars with ' ' for the ultimate clean look
             hide_fillchars = false,
             -- Modern borderless telescope theme
-            borderless_telescope = true,
+            borderless_telescope = false,
 
             -- Set terminal colors used in `:terminal`
             terminal_colors = true,

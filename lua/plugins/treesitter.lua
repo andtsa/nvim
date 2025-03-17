@@ -52,6 +52,7 @@ return {
                 "c",
                 "rust",
                 "svelte",
+                "haskell",
             },
             incremental_selection = {
                 enable = true,
