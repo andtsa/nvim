@@ -86,3 +86,7 @@ vim.o.completeopt                      = "menuone,noinsert,noselect"
 
 -- instant configs
 vim.g.instant_username = "andt"
+
+-- agda (cornelis)
+-- vim.g.cornelis_max_size = 30
+-- vim.g.cornelis_max_width = 40

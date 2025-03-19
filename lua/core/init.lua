@@ -9,6 +9,11 @@ require("core.keymaps")
 -- autocmd's
 require("core.autocmd")
 
+-- neovide-only configs
+if vim.g.neovide then
+    require("core.extras.neovide")
+end
+
 -- vim.loader.enable()
 
 -- get plugin-specific configs from nvim/lua/plugins/options/*.lua
@@ -19,3 +24,6 @@ for _, file in ipairs(vim.fn.readdir(keymap_dir)) do
         dofile(keymap_dir .. file)
     end
 end
+
+-- after plugins loaded, load extras
+-- require("core.extras.cd")

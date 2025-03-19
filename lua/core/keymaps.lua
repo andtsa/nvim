@@ -52,6 +52,8 @@ vim.keymap.set("n", "q", "<Nop>")
 -- open diagnostic in float
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { noremap = true, unique = true, desc = "view diagnostics" })
 
+vim.keymap.set("n", "<Space>d", vim.diagnostic.open_float, { noremap = true, unique = true, desc = "view diagnostics" })
+
 -- exit terminal with esc
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true, unique = true, desc = "exit terminal mode" })
 
@@ -133,7 +135,7 @@ vim.keymap.set(
 vim.keymap.set(
     "n",
     "<Space>b",
-    "<Ctrl-^>",
+    "<C-6>",
     {
         desc = "go to previous buffer",
         silent = false,
@@ -223,21 +225,21 @@ vim.keymap.set("n", "<leader>e", "<cmd>ColorizerToggle<CR>",
 
 -- cmp.lua --------------------------------------------------
 -- Function to enable completions
-vim.keymap.set('n', '<leader>c', function()
+vim.keymap.set("n", "<leader>ce", function()
     vim.o.completeopt = "menuone,noinsert,noselect"
     vim.cmd('echo "Completions enabled"')
 end, { noremap = true, silent = false, unique = true, desc = "enable completions" })
 
 -- Function to disable completions
-vim.keymap.set('n', '<leader>x', function()
+vim.keymap.set("n", "<leader>x", function()
     vim.o.completeopt = "menuone,noselect"
     vim.cmd('echo "Completions disabled"')
 end, { noremap = true, silent = false, unique = true, desc = "disable completions" })
 
 
 -- inlayhints.lua -------------------------------------------
-vim.keymap.set('n', '<leader>h', function()
-    require('lsp-inlayhints').toggle()
+vim.keymap.set("n", "<leader>ih", function()
+    require("lsp-inlayhints").toggle()
 end, { noremap = true, silent = false, unique = true, desc = "Toggle Inlay Hints" })
 
 
@@ -256,7 +258,7 @@ vim.keymap.set(
     "n",
     "<leader>a",
     function()
-        vim.cmd.RustLsp('codeAction') -- supports rust-analyzer's grouping
+        vim.cmd.RustLsp("codeAction") -- supports rust-analyzer's grouping
         -- or vim.lsp.buf.codeAction() if you don't want grouping.
     end,
     { silent = false, unique = true, noremap = true, desc = "Rust analyzer (?)", buffer = vim.api.nvim_get_current_buf() }
@@ -311,3 +313,32 @@ vim.keymap.set(
     "<cmd>TypstPreviewStop<CR>",
     { noremap = true, unique = true, desc = "stop typst preview" }
 )
+
+
+-- haskell.lua
+
+-- haskell-language-server relies heavily on codeLenses,
+-- so auto-refresh (see advanced configuration) is enabled by default
+vim.keymap.set("n", "<space>cl", vim.lsp.codelens.run,
+    { unique = true, noremap = true, silent = false, desc = "open lsp code lens" })
+
+-- TODO:
+-- -- Hoogle search for the type signature of the definition under the cursor
+-- vim.keymap.set("n", "<leader>hs", "<cmd>Telescope ht hoogle_signature<CR>",
+--     { unique = true, noremap = true, silent = false, desc = "hoogle search" })
+
+-- Evaluate all code snippets
+vim.keymap.set("n", "<leader>he", "<cmd>Hls evalAll<CR>",
+    { unique = true, noremap = true, silent = false, desc = "evaluate all code snippets" })
+
+-- TODO:
+-- -- Toggle a GHCi repl for the current package
+-- vim.keymap.set("n", "<leader>hrp", "<cmd>Haskell repl toggle<CR>",
+--     { unique = true, noremap = true, silent = false, desc = "toggle a ghci repl for current package" })
+
+-- Toggle a GHCi repl for the current buffer
+vim.keymap.set("n", "<leader>hrb", "<cmd>Haskell repl toggle %<CR>",
+    { unique = true, noremap = true, silent = false, desc = "toggle ghci repl for current buffer" })
+
+vim.keymap.set("n", "<leader>hrq", "<cmd>Haskell repl quit<CR>",
+    { unique = true, noremap = true, silent = false, desc = "quit the ghci repl" })
