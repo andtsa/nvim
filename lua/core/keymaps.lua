@@ -61,6 +61,14 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true, unique = true, des
 vim.keymap.set("n", "<leader>ww", "<cmd>set wrap<CR>", { noremap = true, unique = true, desc = "turn on text wrap" })
 vim.keymap.set("n", "<leader>wn", "<cmd>set nowrap<CR>", { noremap = true, unique = true, desc = "turn off text wrap" })
 
+
+-- macos clipboard
+vim.keymap.set({ "n", "v", "i" }, "<D-v>", '"+p', { noremap = true, unique = true, desc = "paste from sys clipboard" })
+vim.keymap.set("i", "<C-v>", '"+p', { noremap = true, unique = true, desc = "paste from sys clipboard" })
+vim.keymap.set({ "n", "v", "i" }, "<D-c>", '"+y', { noremap = true, unique = true, desc = "copy to sys clipboard" })
+
+
+
 -- use natural wheel scrolling
 ------------------------------
 
@@ -71,6 +79,10 @@ vim.keymap.set("", "<ScrollWheelDown>", "<Down>", { noremap = true, silent = tru
 vim.keymap.set("", "<ScrollWheelLeft>", "<Left>", { noremap = true, silent = true })
 vim.keymap.set("", "<ScrollWheelRight>", "<Right>", { noremap = true, silent = true })
 
+-- move half a window down
+vim.keymap.set("n", "<C-s>", "<C-d>", { noremap = true, silent = false, unique = true })
+vim.keymap.set("n", "<C-j>", "<C-d>", { noremap = true, silent = false, unique = true })
+vim.keymap.set("n", "<C-k>", "<C-u>", { noremap = true, silent = false, unique = true })
 
 -- window managment
 -----------------------------------------------------------------------------------
@@ -104,6 +116,12 @@ vim.keymap.set("n", "<leader>td", "<cmd>split<CR><cmd>terminal<CR>8<C-W>_a",
     { noremap = true, unique = true, desc = "open terminal below" })
 vim.keymap.set("n", "<leader>T", "<cmd>split<CR><cmd>terminal<CR>8<C-W>_a",
     { noremap = true, unique = true, desc = "open terminal below" })
+
+-- open neovim settings
+vim.keymap.set("n", "<leader>nedit", function()
+    local nconf_path = vim.fn.expand("~/.config/nvim/")
+    vim.api.nvim_set_current_dir(nconf_path)
+end, { noremap = true, unique = true, silent = false, desc = "open nvim config directory" })
 
 -- reload current file
 vim.keymap.set(
@@ -342,3 +360,14 @@ vim.keymap.set("n", "<leader>hrb", "<cmd>Haskell repl toggle %<CR>",
 
 vim.keymap.set("n", "<leader>hrq", "<cmd>Haskell repl quit<CR>",
     { unique = true, noremap = true, silent = false, desc = "quit the ghci repl" })
+
+
+-- -- project explorer .lua ------------------
+-- -----------------------------------------------------------
+--
+vim.keymap.set("n", "<leader>fv", "<C-f>",
+    { unique = true, noremap = true, silent = false, desc = "view only fav projects" })
+vim.keymap.set("n", "<leader>fa", "<C-A-f>",
+    { unique = true, noremap = true, silent = false, desc = "add project to favs" })
+vim.keymap.set("n", "<leader>fs", "<C-a>",
+    { unique = true, noremap = true, silent = false, desc = "add new project" })

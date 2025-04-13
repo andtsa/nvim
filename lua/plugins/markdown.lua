@@ -396,7 +396,7 @@ return {
                 --   'icon':      Gets inlined before the link text
                 --   'highlight': Highlight for the 'icon'
                 custom = {
-                    web = { pattern = '^http[s]?://', icon = '', highlight = 'RenderMarkdownLink' },
+                    web = { pattern = '^http[s]?://', icon = ' ', highlight = 'RenderMarkdownLink' },
                 },
             },
             sign = {

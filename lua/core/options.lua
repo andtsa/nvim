@@ -90,3 +90,9 @@ vim.g.instant_username = "andt"
 -- agda (cornelis)
 -- vim.g.cornelis_max_size = 30
 -- vim.g.cornelis_max_width = 40
+
+-- vim.g.nvim_agda_settings = {
+--     agda = "/Users/andtsa/.cabal/bin/agda", -- Location of Agda binary
+--     agda_args = {},                       -- Default arguments to Agda binary
+--     debug_p = true                        -- Turn debug prints on or off
+-- }

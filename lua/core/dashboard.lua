@@ -22,7 +22,7 @@ dashboard.section.header.opts = {
 dashboard.section.buttons.val = {
     dashboard.button("q  ", "  > Quit vim", "<cmd>qa<CR>"),
     dashboard.button("wr ", "  > Restore Session For Current Directory", "<cmd>SessionRestore<CR>"),
-    dashboard.button("mm ", "  > Go to directory", "<leader>cd"),
+    dashboard.button("mm ", "  > Go to directory", "<cmd>ProjectExplorer<cr>"),
     dashboard.button("ff ", "  > Find File", "<cmd>Telescope find_files<CR>"),
     dashboard.button("fs ", "  > Find Word", "<cmd>Telescope live_grep<CR>"),
     dashboard.button("\\  ", "  > Toggle file explorer", "<cmd>Neotree toggle<CR>"),

@@ -6,6 +6,7 @@ return {
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
         "nvim-tree/nvim-web-devicons",
         "folke/todo-comments.nvim",
+        "xiyaowong/telescope-emoji.nvim",
     },
     config = function()
         local telescope = require("telescope")
@@ -25,6 +26,7 @@ return {
         })
 
         telescope.load_extension("fzf")
+        telescope.load_extension("emoji")
         -- telescope.load_extension('hoogle')
         --
 
@@ -60,5 +62,8 @@ return {
             { unique = true, silent = false, desc = "Find and set working directory" })
         vim.keymap.set("n", "m", find_and_set_cwd,
             { unique = true, silent = false, desc = "Find and set working directory" })
+
+        vim.keymap.set("n", "<leader>fe", "<cmd>Telescope emoji<CR>",
+            { unique = true, noremap = true, silent = false, desc = "find & insert emoji" })
     end,
 }

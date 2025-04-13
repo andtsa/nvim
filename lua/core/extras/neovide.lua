@@ -9,7 +9,7 @@ vim.g.neovide_padding_bottom = 1
 vim.g.neovide_padding_right = 1
 vim.g.neovide_padding_left = 1
 
-
+-- vim.g.neovide_input_macos_option_key_is_meta = 'both'
 -- Helper function for transparency formatting
 -- local alpha = function()
 --     return string.format("%x", math.floor((255 * vim.g.transparency) or 0.8))
@@ -27,6 +27,9 @@ vim.g.neovide_floating_blur_amount_x = 5.0
 vim.g.neovide_floating_blur_amount_y = 5.0
 
 vim.g.neovide_show_border = false
+
+local default_path = vim.fn.expand("~/")
+vim.api.nvim_set_current_dir(default_path)
 
 -- vim.g.neovide_theme = 'auto'
 
