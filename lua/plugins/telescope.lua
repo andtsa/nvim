@@ -7,6 +7,7 @@ return {
         "nvim-tree/nvim-web-devicons",
         "folke/todo-comments.nvim",
         "xiyaowong/telescope-emoji.nvim",
+        "nvim-telescope/telescope-bibtex.nvim",
     },
     config = function()
         local telescope = require("telescope")
@@ -27,6 +28,7 @@ return {
 
         telescope.load_extension("fzf")
         telescope.load_extension("emoji")
+        telescope.load_extension("bibtex")
         -- telescope.load_extension('hoogle')
         --
 
@@ -39,7 +41,7 @@ return {
         local function find_and_set_cwd()
             builtin.find_files({
                 prompt_title = "Select Directory",
-                find_command = { "fd", "--type", "d", "--hidden", "--follow" }, -- `fd` to list only directories
+                find_command = { "fd", "--type", "d", "--follow" }, -- `fd` to list only directories
                 attach_mappings = function(prompt_bufnr, map)
                     local action_state = require("telescope.actions.state")
 
@@ -60,8 +62,8 @@ return {
 
         vim.keymap.set("n", "<leader>cd", find_and_set_cwd,
             { unique = true, silent = false, desc = "Find and set working directory" })
-        vim.keymap.set("n", "m", find_and_set_cwd,
-            { unique = true, silent = false, desc = "Find and set working directory" })
+        -- vim.keymap.set("n", "m", find_and_set_cwd,
+        --     { unique = true, silent = false, desc = "Find and set working directory" })
 
         vim.keymap.set("n", "<leader>fe", "<cmd>Telescope emoji<CR>",
             { unique = true, noremap = true, silent = false, desc = "find & insert emoji" })

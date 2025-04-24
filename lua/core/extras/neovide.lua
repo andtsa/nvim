@@ -28,8 +28,8 @@ vim.g.neovide_floating_blur_amount_y = 5.0
 
 vim.g.neovide_show_border = false
 
-local default_path = vim.fn.expand("~/")
-vim.api.nvim_set_current_dir(default_path)
+-- local default_path = vim.fn.expand("~/")
+-- vim.api.nvim_set_current_dir(default_path)
 
 -- vim.g.neovide_theme = 'auto'
 

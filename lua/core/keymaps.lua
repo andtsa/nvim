@@ -63,9 +63,10 @@ vim.keymap.set("n", "<leader>wn", "<cmd>set nowrap<CR>", { noremap = true, uniqu
 
 
 -- macos clipboard
-vim.keymap.set({ "n", "v", "i" }, "<D-v>", '"+p', { noremap = true, unique = true, desc = "paste from sys clipboard" })
-vim.keymap.set("i", "<C-v>", '"+p', { noremap = true, unique = true, desc = "paste from sys clipboard" })
-vim.keymap.set({ "n", "v", "i" }, "<D-c>", '"+y', { noremap = true, unique = true, desc = "copy to sys clipboard" })
+vim.keymap.set({ "n", "v" }, "<D-v>", '"+p', { noremap = true, unique = true, desc = "paste from sys clipboard" })
+vim.keymap.set("i", "<D-v>", '<Esc>"+pA', { noremap = true, unique = true, desc = "paste from sys clipboard" })
+vim.keymap.set("i", "<C-v>", '<Esc>"+pA', { noremap = true, unique = true, desc = "paste from sys clipboard" })
+vim.keymap.set({ "n", "v" }, "<D-c>", '"+y', { noremap = true, unique = true, desc = "copy to sys clipboard" })
 
 
 
@@ -236,27 +237,31 @@ vim.keymap.set("n", "<leader>rr", ":RunFile<CR>", {
 -- plugin specific stuff
 ------------------------------------------------------------------------------------
 
+vim.keymap.set("n", "<leader>rv", vim.lsp.buf.rename,
+    { noremap = true, unique = true, silent = false, desc = "rename variable" })
+
+
 -- colourcodes.lua ------------------------------------------
 -- disabling colouring of hex codes
-vim.keymap.set("n", "<leader>e", "<cmd>ColorizerToggle<CR>",
+vim.keymap.set("n", "<leader>clr", "<cmd>ColorizerToggle<CR>",
     { noremap = true, unique = true, silent = false, desc = "toggle inline colour highlights" })
 
 -- cmp.lua --------------------------------------------------
 -- Function to enable completions
-vim.keymap.set("n", "<leader>ce", function()
+vim.keymap.set("n", "<leader>cme", function()
     vim.o.completeopt = "menuone,noinsert,noselect"
     vim.cmd('echo "Completions enabled"')
 end, { noremap = true, silent = false, unique = true, desc = "enable completions" })
 
 -- Function to disable completions
-vim.keymap.set("n", "<leader>x", function()
+vim.keymap.set("n", "<leader>cmx", function()
     vim.o.completeopt = "menuone,noselect"
     vim.cmd('echo "Completions disabled"')
 end, { noremap = true, silent = false, unique = true, desc = "disable completions" })
 
 
 -- inlayhints.lua -------------------------------------------
-vim.keymap.set("n", "<leader>ih", function()
+vim.keymap.set("n", "<leader>hi", function()
     require("lsp-inlayhints").toggle()
 end, { noremap = true, silent = false, unique = true, desc = "Toggle Inlay Hints" })
 
@@ -279,7 +284,16 @@ vim.keymap.set(
         vim.cmd.RustLsp("codeAction") -- supports rust-analyzer's grouping
         -- or vim.lsp.buf.codeAction() if you don't want grouping.
     end,
-    { silent = false, unique = true, noremap = true, desc = "Rust analyzer (?)", buffer = vim.api.nvim_get_current_buf() }
+    { silent = false, unique = true, noremap = true, desc = "see (rust) code actions at cursor" }
+)
+
+vim.keymap.set(
+    { "n", "v" },
+    "<leader>rj",
+    function()
+        vim.cmd.RustLsp("joinLines")
+    end,
+    { silent = false, unique = true, noremap = true, desc = "Join current line(s)" }
 )
 
 -- rust, not plugin. run fmt

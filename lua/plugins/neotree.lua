@@ -26,22 +26,22 @@ return {
             popup_border_style = "rounded",
             file_size = {
                 enabled = true,
-                required_width = 25, -- min width of window required to show this column
+                required_width = 30, -- min width of window required to show this column
             },
             type = {
                 enabled = true,
-                required_width = 122, -- min width of window required to show this column
+                required_width = 42, -- min width of window required to show this column
             },
             last_modified = {
                 enabled = true,
-                required_width = 88, -- min width of window required to show this column
+                required_width = 35, -- min width of window required to show this column
             },
             created = {
                 enabled = true,
-                required_width = 110, -- min width of window required to show this column
+                required_width = 50, -- min width of window required to show this column
             },
             symlink_target = {
-                enabled = false,
+                enabled = true,
             },
             filesystem = {
                 filtered_items = {
@@ -53,7 +53,7 @@ return {
                         --"*/src/*/tsconfig.json",
                     },
                     always_show = { -- remains visible even if other settings would normally hide it
-                        --".gitignored",
+                        ".gitignore",
                     },
                     always_show_by_pattern = { -- uses glob style patterns
                         --".env*",
