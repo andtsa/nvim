@@ -296,18 +296,37 @@ vim.keymap.set(
     { silent = false, unique = true, noremap = true, desc = "Join current line(s)" }
 )
 
--- rust, not plugin. run fmt
-vim.keymap.set(
-    "n",
-    "<leader>fmt",
-    "<cmd>w<CR><cmd>!/Users/andtsa/Automator/run/target/release/run fmt<CR><cmd>e %<CR>",
-    {
-        silent = false,
-        noremap = true,
-        unique = true,
-        desc = "run cargo fmt",
-    }
-)
+-- not plugin. run fmt
+local fmt_opts = {
+    silent  = false,
+    noremap = true,
+    unique  = true,
+    desc    = "run formatter based on filetype",
+}
+
+vim.keymap.set("n", "<leader>fmt", function()
+    -- save the file first
+    vim.cmd("w")
+
+    -- get the file’s full path and extension
+    local fullpath = vim.fn.expand("%:p")
+    local ext      = vim.fn.expand("%:e")
+
+    if ext == "rs" then
+        -- for Rust files
+        vim.cmd("!run fmt")
+    elseif ext == "bib" then
+        -- for BibTeX files: pass the full .bib path
+        vim.cmd("!run bibfmt " .. vim.fn.shellescape(fullpath))
+    else
+        vim.notify("No formatter configured for *." .. ext, vim.log.levels.WARN)
+        return
+    end
+
+    -- reload the buffer so you see changes
+    vim.cmd("e %")
+end, fmt_opts)
+
 
 -- nabla.nvim -----------------------------------------------
 
