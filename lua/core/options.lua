@@ -82,10 +82,12 @@ end
 
 -- enable completions by default
 vim.o.completeopt                      = "menuone,noinsert,noselect"
+vim.o.sessionoptions                   = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
+vim.o.shell                            = "fish"
 
 -- instant configs
-vim.g.instant_username = "andt"
+vim.g.instant_username                 = "andt"
 
 -- agda (cornelis)
 -- vim.g.cornelis_max_size = 30

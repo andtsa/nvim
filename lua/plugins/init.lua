@@ -3,9 +3,9 @@
 
 return {
     "nvim-lua/plenary.nvim", -- concurrent lua, for other plugins
-    {
-        "mfussenegger/nvim-dap",
-        event = "BufReadPre"
-    },
+    -- {
+    --     "mfussenegger/nvim-dap",
+    --     event = "BufReadPre"
+    -- },
     -- "dstein64/vim-startuptime",
 }

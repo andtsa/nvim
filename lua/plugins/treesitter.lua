@@ -53,6 +53,8 @@ return {
                 "rust",
                 "svelte",
                 "haskell",
+                "r",
+                "rnoweb"
             },
             incremental_selection = {
                 enable = true,

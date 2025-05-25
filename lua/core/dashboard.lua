@@ -9,7 +9,7 @@ local function read_art_file(filepath)
     return lines
 end
 -- Set header using the art from the file
-local art_filepath = vim.fn.stdpath('config') .. '/lua/core/artwork.txt'
+local art_filepath = vim.fn.stdpath('config') .. '/lua/core/artworks/planet.txt'
 dashboard.section.header.val = read_art_file(art_filepath)
 
 vim.api.nvim_set_hl(0, 'DashboardHeader', { fg = "#ffc080" })
@@ -21,7 +21,7 @@ dashboard.section.header.opts = {
 -- Set menu
 dashboard.section.buttons.val = {
     dashboard.button("q  ", "  > Quit vim", "<cmd>qa<CR>"),
-    dashboard.button("wr ", "  > Restore Session For Current Directory", "<cmd>SessionRestore<CR>"),
+    -- dashboard.button("wr ", "  > Restore Session For Current Directory", "<cmd>SessionRestore<CR>"),
     dashboard.button("mm ", "  > Go to directory", "<cmd>ProjectExplorer<cr>"),
     dashboard.button("ff ", "  > Find File", "<cmd>Telescope find_files<CR>"),
     dashboard.button("fs ", "  > Find Word", "<cmd>Telescope live_grep<CR>"),

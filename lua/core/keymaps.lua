@@ -43,11 +43,15 @@ vim.keymap.set("i", "<C-]>", "<C-o>$", { noremap = true, silent = false, desc = 
 -- vim.keymap.set("i", "<C-[>", "<C-o>0", { noremap = true, silent = false, desc = "0 in insert mode" })
 
 -- clear search highlights
-vim.keymap.set("n", "qs", "<cmd>nohl<CR>", { noremap = true, unique = true, desc = "clear search highlights" })
+-- vim.keymap.set("n", "qs", "<cmd>nohl<CR>", { noremap = true, unique = true, desc = "clear search highlights" })
 
 
 -- disable recording
 vim.keymap.set("n", "q", "<Nop>")
+-- quick exit on typo
+vim.api.nvim_create_user_command('Qa', function()
+    vim.cmd("qa")
+end, {})
 
 -- open diagnostic in float
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { noremap = true, unique = true, desc = "view diagnostics" })
@@ -90,7 +94,9 @@ vim.keymap.set("n", "<C-k>", "<C-u>", { noremap = true, silent = false, unique =
 
 -- moving between vsplit
 vim.keymap.set("n", "<leader>]", "<C-w>l", { noremap = true, unique = true, desc = "switch to right window" })
+-- vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, unique = true, desc = "switch to right window" })
 vim.keymap.set("n", "<leader>[", "<C-w>h", { noremap = true, unique = true, desc = "switch to left window" })
+-- vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, unique = true, desc = "switch to left window" })
 
 -- moving between split
 
@@ -111,6 +117,10 @@ vim.keymap.set("n", "<leader>vs", "<cmd>vs<CR>",
     { noremap = true, unique = true, desc = "split current window into left & right" })
 vim.keymap.set("n", "<leader>sv", "<cmd>vs<CR>",
     { noremap = true, unique = true, desc = "split current window into left & right" })
+
+-- terminal to the side
+vim.keymap.set("n", "<leader>vt", "<cmd>vs<CR><cmd>terminal<CR>a",
+    { unique = true, desc = "open terminal in right half" })
 
 -- create terminal below
 vim.keymap.set("n", "<leader>td", "<cmd>split<CR><cmd>terminal<CR>8<C-W>_a",
@@ -141,7 +151,7 @@ vim.keymap.set(
 vim.keymap.set(
     "n",
     "<leader>oc",
-    "<cmd>!open %<CR>",
+    "<cmd>!open \"%\"<CR>",
     {
         unique = true,
         noremap = true,
@@ -166,6 +176,9 @@ vim.keymap.set(
 -- misc
 ----------------------------------------------------
 
+-- change theme
+vim.keymap.set("n", "<leader>fc", "<cmd>FzfLua colorschemes<CR>", { unique = true, desc = "colourscheme picker" })
+
 -- spellcheck
 vim.keymap.set(
     "n",
@@ -174,12 +187,12 @@ vim.keymap.set(
     { noremap = true, unique = true, desc = "enable spellchecking" }
 )
 
-vim.keymap.set(
-    "n",
-    "<leader>==",
-    "z=",
-    { noremap = true, unique = true, desc = "same as z=" }
-)
+-- vim.keymap.set(
+--     "n",
+--     "<leader>==",
+--     "z=",
+--     { noremap = true, unique = true, desc = "same as z=" }
+-- )
 
 vim.keymap.set(
     "n",
@@ -195,12 +208,12 @@ vim.keymap.set(
     "<cmd>lua vim.lsp.buf.hover()<CR>",
     { unique = true, noremap = true, desc = "view hover action" }
 )
-vim.keymap.set(
-    "v",
-    "<Tab>",
-    "<cmd>lua vim.lsp.buf.hover()<CR>",
-    { unique = true, noremap = true, desc = "view hover action" }
-)
+-- vim.keymap.set(
+--     "v",
+--     "<Tab>",
+--     "<cmd>lua vim.lsp.buf.hover()<CR>",
+--     { unique = true, noremap = true, desc = "view hover action" }
+-- )
 
 
 -- running files in-place
@@ -211,12 +224,14 @@ vim.api.nvim_create_user_command("RunFile", function()
     local ext = vim.fn.expand("%:e")  -- Get file extension
 
     local commands = {
-        hs = "runghc",
+        hs  = "runghc",
         lua = "lua",
-        py = "python3",
-        rs = "cargo run",
-        sh = "bash",
-        js = "node",
+        py  = "python3",
+        rs  = "cargo run",
+        sh  = "zsh",
+        js  = "node",
+        r   = "/usr/local/bin/Rscript",
+        R   = "/usr/local/bin/Rscript"
     }
 
     local cmd = commands[ext]
@@ -261,9 +276,9 @@ end, { noremap = true, silent = false, unique = true, desc = "disable completion
 
 
 -- inlayhints.lua -------------------------------------------
-vim.keymap.set("n", "<leader>hi", function()
-    require("lsp-inlayhints").toggle()
-end, { noremap = true, silent = false, unique = true, desc = "Toggle Inlay Hints" })
+-- vim.keymap.set("n", "<leader>hi", function()
+--     require("lsp-inlayhints").toggle()
+-- end, { noremap = true, silent = false, unique = true, desc = "Toggle Inlay Hints" })
 
 
 -- todo.lua -------------------------------------------------
@@ -279,7 +294,7 @@ end, { desc = "Previous todo comment" })
 -- rust.lua -------------------------------------------------
 vim.keymap.set(
     "n",
-    "<leader>a",
+    "<leader>ra",
     function()
         vim.cmd.RustLsp("codeAction") -- supports rust-analyzer's grouping
         -- or vim.lsp.buf.codeAction() if you don't want grouping.
@@ -296,6 +311,10 @@ vim.keymap.set(
     { silent = false, unique = true, noremap = true, desc = "Join current line(s)" }
 )
 
+vim.keymap.set("n", "<leader>lf", function()
+    vim.lsp.buf.format()
+end, { unique = true, desc = "lsp format" })
+
 -- not plugin. run fmt
 local fmt_opts = {
     silent  = false,
@@ -311,10 +330,11 @@ vim.keymap.set("n", "<leader>fmt", function()
     -- get the file’s full path and extension
     local fullpath = vim.fn.expand("%:p")
     local ext      = vim.fn.expand("%:e")
+    local par_dir  = vim.fn.expand("%:h")
 
     if ext == "rs" then
         -- for Rust files
-        vim.cmd("!run fmt")
+        vim.cmd("!cd " .. vim.fn.shellescape(par_dir) .. " && run fmt")
     elseif ext == "bib" then
         -- for BibTeX files: pass the full .bib path
         vim.cmd("!run bibfmt " .. vim.fn.shellescape(fullpath))
@@ -330,19 +350,19 @@ end, fmt_opts)
 
 -- nabla.nvim -----------------------------------------------
 
-vim.keymap.set("n", "<leader>np", function()
-    require("nabla").popup({
-        border = "rounded" -- Customize border style: `single`, `double`, or `rounded`
-    })
-end, { noremap = true, unique = true, desc = "popup mathjax preview (for expr under cursor)" })
-
-vim.keymap.set("n", "<leader>ni", function()
-    require("nabla").toggle_virt({
-        autogen = true, -- auto-regenerate ASCII art when exiting insert mode
-        silent = false, -- silents error messages
-        align_center = false,
-    })
-end, { noremap = true, unique = true, desc = "toggle inline mathjax preview" })
+-- vim.keymap.set("n", "<leader>np", function()
+--     require("nabla").popup({
+--         border = "rounded" -- Customize border style: `single`, `double`, or `rounded`
+--     })
+-- end, { noremap = true, unique = true, desc = "popup mathjax preview (for expr under cursor)" })
+--
+-- vim.keymap.set("n", "<leader>ni", function()
+--     require("nabla").toggle_virt({
+--         autogen = true, -- auto-regenerate ASCII art when exiting insert mode
+--         silent = false, -- silents error messages
+--         align_center = false,
+--     })
+-- end, { noremap = true, unique = true, desc = "toggle inline mathjax preview" })
 
 
 -- python shenanigans ---------------------------------------
@@ -352,25 +372,25 @@ end, { noremap = true, unique = true, desc = "toggle inline mathjax preview" })
 
 -- typst.lua
 
-vim.keymap.set(
-    "n",
-    "<leader>tp<CR>",
-    "<cmd>TypstPreview<CR>",
-    { noremap = true, unique = true, desc = "start typst preview" }
-)
-vim.keymap.set(
-    "n",
-    "<leader>tp<Esc>",
-    "<cmd>TypstPreviewStop<CR>",
-    { noremap = true, unique = true, desc = "stop typst preview" }
-)
-
+-- vim.keymap.set(
+--     "n",
+--     "<leader>tp<CR>",
+--     "<cmd>TypstPreview<CR>",
+--     { noremap = true, unique = true, desc = "start typst preview" }
+-- )
+-- vim.keymap.set(
+--     "n",
+--     "<leader>tp<Esc>",
+--     "<cmd>TypstPreviewStop<CR>",
+--     { noremap = true, unique = true, desc = "stop typst preview" }
+-- )
+--
 
 -- haskell.lua
 
 -- haskell-language-server relies heavily on codeLenses,
 -- so auto-refresh (see advanced configuration) is enabled by default
-vim.keymap.set("n", "<space>cl", vim.lsp.codelens.run,
+vim.keymap.set("n", "<space>l", vim.lsp.codelens.run,
     { unique = true, noremap = true, silent = false, desc = "open lsp code lens" })
 
 -- TODO:
@@ -379,8 +399,8 @@ vim.keymap.set("n", "<space>cl", vim.lsp.codelens.run,
 --     { unique = true, noremap = true, silent = false, desc = "hoogle search" })
 
 -- Evaluate all code snippets
-vim.keymap.set("n", "<leader>he", "<cmd>Hls evalAll<CR>",
-    { unique = true, noremap = true, silent = false, desc = "evaluate all code snippets" })
+-- vim.keymap.set("n", "<leader>he", "<cmd>Hls evalAll<CR>",
+--     { unique = true, noremap = true, silent = false, desc = "evaluate all code snippets" })
 
 -- TODO:
 -- -- Toggle a GHCi repl for the current package
@@ -388,11 +408,11 @@ vim.keymap.set("n", "<leader>he", "<cmd>Hls evalAll<CR>",
 --     { unique = true, noremap = true, silent = false, desc = "toggle a ghci repl for current package" })
 
 -- Toggle a GHCi repl for the current buffer
-vim.keymap.set("n", "<leader>hrb", "<cmd>Haskell repl toggle %<CR>",
-    { unique = true, noremap = true, silent = false, desc = "toggle ghci repl for current buffer" })
+-- vim.keymap.set("n", "<leader>hrb", "<cmd>Haskell repl toggle %<CR>",
+--     { unique = true, noremap = true, silent = false, desc = "toggle ghci repl for current buffer" })
 
-vim.keymap.set("n", "<leader>hrq", "<cmd>Haskell repl quit<CR>",
-    { unique = true, noremap = true, silent = false, desc = "quit the ghci repl" })
+-- vim.keymap.set("n", "<leader>hrq", "<cmd>Haskell repl quit<CR>",
+--     { unique = true, noremap = true, silent = false, desc = "quit the ghci repl" })
 
 
 -- -- project explorer .lua ------------------

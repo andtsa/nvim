@@ -13,29 +13,35 @@
 --      * See all available options with :h nvim_create_autocmd.
 --
 -- example:
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*.lua",
-    callback = function()
-        vim.lsp.buf.format()
-    end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--     pattern = "*.lua",
+--     callback = function()
+--         vim.lsp.buf.format()
+--     end,
+-- })
 
-vim.api.nvim_create_autocmd("BufReadPre", {
-    pattern = "*.*",
-    callback = function()
-        vim.opt.linebreak = true
-        vim.opt.wrap = true
-    end
-})
+-- vim.api.nvim_create_autocmd("BufReadPre", {
+--     pattern = "*.*",
+--     callback = function()
+--         vim.opt.linebreak = true
+--         vim.opt.wrap = true
+--     end
+-- })
 
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+--     pattern = "*.qmd",
+--     callback = function()
+--         vim.fn.jobstart({ "quarto", "format", vim.fn.expand("%") }, { detach = true })
+--     end,
+-- })
 
 -- Enable inlay hints when the LSP attaches
-vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        require("lsp-inlayhints").on_attach(client, args.buf)
-    end,
-})
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--     callback = function(args)
+--         local client = vim.lsp.get_client_by_id(args.data.client_id)
+--         require("lsp-inlayhints").on_attach(client, args.buf)
+--     end,
+-- })
 
 vim.api.nvim_create_autocmd("BufReadPost", {
     callback = function()

@@ -1,3 +1,4 @@
+-- completion for : commands
 return {
     'smolck/command-completion.nvim',
     config = function()

@@ -27,3 +27,6 @@ end
 
 -- after plugins loaded, load extras
 -- require("core.extras.cd")
+
+-- auto detect if theme is light
+require("core.extras.alacritty")
