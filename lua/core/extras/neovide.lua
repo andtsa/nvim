@@ -1,5 +1,7 @@
+vim.print(vim.g.neovide_version)
+
 -- Put anything you want to happen only in Neovide here
--- vim.o.guifont = "SF Mono Nerd Font:h12"
+vim.o.guifont = "FiraCode Nerd Font Mono:h12"
 
 -- vim.g.neovide_text_gamma = 0.0
 -- vim.g.neovide_text_contrast = 0.5
@@ -28,9 +30,29 @@ vim.g.neovide_floating_blur_amount_y = 5.0
 
 vim.g.neovide_show_border = false
 
--- local default_path = vim.fn.expand("~/")
--- vim.api.nvim_set_current_dir(default_path)
+local default_path = vim.fn.expand("~/")
+vim.api.nvim_set_current_dir(default_path)
 
 -- vim.g.neovide_theme = 'auto'
 
 vim.g.neovide_remember_window_size = true
+
+local function set_guifont_size(size)
+    assert(type(size) == "number", "size must be a number")
+    local name = "FiraCode Nerd Font Mono"
+    vim.o.guifont = string.format("%s:h%d", name, size)
+end
+
+-- create a user command so you can do :SetFontSize 14
+vim.api.nvim_create_user_command("SetFontSize", function(ctx)
+    local n = tonumber(ctx.args)
+    if not n then
+        vim.notify("Invalid font size: " .. ctx.args, vim.log.levels.ERROR)
+        return
+    end
+    set_guifont_size(n)
+    vim.notify("GUIfont set to " .. vim.o.guifont, vim.log.levels.INFO)
+end, {
+    nargs = 1,
+    desc  = "Set the GUI font size (e.g. :SetFontSize 12)"
+})

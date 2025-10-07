@@ -51,6 +51,8 @@ vim.opt.linebreak                      = true
 vim.opt.ignorecase                     = true -- ignore case when searching,
 vim.opt.smartcase                      = true -- unless the query uses mixed case
 
+vim.opt.colorcolumn                    = "93"
+
 -- Override the LSP hover handler to set a maximum width
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "rounded",

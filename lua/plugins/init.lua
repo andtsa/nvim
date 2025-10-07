@@ -8,4 +8,9 @@ return {
     --     event = "BufReadPre"
     -- },
     -- "dstein64/vim-startuptime",
+    {
+        "chrisgrieser/nvim-lsp-endhints",
+        event = "LspAttach",
+        opts = {}, -- required, even if empty
+    },
 }

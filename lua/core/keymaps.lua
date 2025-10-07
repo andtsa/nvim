@@ -45,16 +45,30 @@ vim.keymap.set("i", "<C-]>", "<C-o>$", { noremap = true, silent = false, desc = 
 -- clear search highlights
 -- vim.keymap.set("n", "qs", "<cmd>nohl<CR>", { noremap = true, unique = true, desc = "clear search highlights" })
 
+-- greek
+vim.keymap.set({ "n", "v" }, "α", "a");
+vim.keymap.set({ "n", "v" }, "ι", "i");
+vim.keymap.set({ "n", "v" }, "ρ", "r");
+vim.keymap.set({ "n", "v" }, "δ", "d");
+vim.keymap.set({ "n", "v" }, "ω", "v");
+vim.keymap.set({ "n", "v" }, "Ω", "V");
+vim.keymap.set({ "n", "v" }, "υ", "y");
+vim.keymap.set({ "n", "v" }, "π", "p");
+vim.keymap.set({ "n", "v" }, "θ", "u");
+vim.keymap.set({ "n", "v" }, "<C-ρ>", "<C-r>");
+vim.keymap.set("v", "<leader>υ", '"+y')
 
 -- disable recording
 vim.keymap.set("n", "q", "<Nop>")
 -- quick exit on typo
 vim.api.nvim_create_user_command('Qa', function()
+    vim.cmd("Neotree close")
     vim.cmd("qa")
 end, {})
 
 -- open diagnostic in float
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { noremap = true, unique = true, desc = "view diagnostics" })
+vim.keymap.set("n", "t", vim.diagnostic.open_float, { noremap = true, unique = true, desc = "view diagnostics" })
 
 vim.keymap.set("n", "<Space>d", vim.diagnostic.open_float, { noremap = true, unique = true, desc = "view diagnostics" })
 
@@ -79,8 +93,11 @@ vim.keymap.set({ "n", "v" }, "<D-c>", '"+y', { noremap = true, unique = true, de
 
 vim.o.scrolloff = 4 -- keep 4 lines from end of screen
 
-vim.keymap.set("", "<ScrollWheelUp>", "<Up>", { noremap = true, silent = true, unique = true })
-vim.keymap.set("", "<ScrollWheelDown>", "<Down>", { noremap = true, silent = true })
+vim.keymap.set({ "n", "v", "c" }, "<ScrollWheelUp>", "<Up>", { noremap = true, silent = true, unique = true })
+vim.keymap.set({ "n", "v", "c" }, "<ScrollWheelDown>", "<Down>", { noremap = true, silent = true, unique = true })
+
+vim.keymap.set({ "i" }, "<ScrollWheelUp>", "<C-o><C-y>", { noremap = true, silent = true, unique = true })
+vim.keymap.set({ "i" }, "<ScrollWheelDown>", "<C-o><C-e>", { noremap = true, silent = true, unique = true })
 vim.keymap.set("", "<ScrollWheelLeft>", "<Left>", { noremap = true, silent = true })
 vim.keymap.set("", "<ScrollWheelRight>", "<Right>", { noremap = true, silent = true })
 
@@ -104,7 +121,7 @@ vim.keymap.set("n", "<leader>=", "<C-w>k", { noremap = true, unique = true, desc
 vim.keymap.set("n", "<leader>\\", "<C-w>j", { noremap = true, unique = true, desc = "switch to down window" })
 
 -- open terminal in current window
-vim.keymap.set("n", "tt", "<cmd>terminal<CR>", { noremap = true, unique = true, desc = "make current window a terminal" })
+vim.keymap.set("n", "T", "<cmd>terminal<CR>", { noremap = true, unique = true, desc = "make current window a terminal" })
 
 -- split into top n bottom
 vim.keymap.set("n", "<leader>ss", "<cmd>split<CR>",
@@ -315,6 +332,10 @@ vim.keymap.set("n", "<leader>lf", function()
     vim.lsp.buf.format()
 end, { unique = true, desc = "lsp format" })
 
+vim.keymap.set("n", "<leader>l", function()
+    vim.lsp.buf.format()
+end, { unique = true, desc = "lsp format" })
+
 -- not plugin. run fmt
 local fmt_opts = {
     silent  = false,
@@ -424,3 +445,44 @@ vim.keymap.set("n", "<leader>fa", "<C-A-f>",
     { unique = true, noremap = true, silent = false, desc = "add project to favs" })
 vim.keymap.set("n", "<leader>fs", "<C-a>",
     { unique = true, noremap = true, silent = false, desc = "add new project" })
+
+
+-- coq.lua
+-- -------------------------------
+
+-- "q" is the coq leader
+vim.keymap.set("n", "qf", "<cmd>VsCoq stepForward<CR>",
+    { unique = true, silent = false, desc = "coq stepForward" })
+vim.keymap.set("n", "q<Down>", "<cmd>VsCoq stepForward<CR>",
+    { unique = true, silent = false, desc = "coq stepForward" })
+vim.keymap.set("n", "q<Right>", "<cmd>VsCoq stepForward<CR>",
+    { unique = true, silent = false, desc = "coq stepForward" })
+
+vim.keymap.set("n", "qb", "<cmd>VsCoq stepBackward<CR>",
+    { unique = true, silent = false, desc = "coq stepBackward" })
+vim.keymap.set("n", "q<Up>", "<cmd>VsCoq stepBackward<CR>",
+    { unique = true, silent = false, desc = "coq stepBackward" })
+vim.keymap.set("n", "q<Left>", "<cmd>VsCoq stepBackward<CR>",
+    { unique = true, silent = false, desc = "coq stepBackward" })
+
+
+vim.keymap.set("n", "qe", "<cmd>VsCoq interpretToEnd<CR>",
+    { unique = true, silent = false, desc = "coq interpretToEnd" })
+vim.keymap.set("n", "qp", "<cmd>VsCoq interpretToPoint<CR>",
+    { unique = true, silent = false, desc = "coq interpretToPoint" })
+
+vim.keymap.set("n", "qr", "<cmd>VsCoq resetCoq<CR>",
+    { unique = true, silent = false, desc = "reset coq" })
+
+
+-- quarto
+
+vim.keymap.set("n", "<leader>qp", "<cmd>QuartoPreview<CR>", { unique = true, desc = "quarto preview" })
+
+
+-- tidal
+-- ======
+
+vim.keymap.set("n", "<leader>tl", "<cmd>TidalLaunch<CR>", { unique = true, desc = "launch tidal" })
+vim.keymap.set("n", "<leader>tq", "<cmd>TidalQuit<CR>", { unique = true, desc = "quit tidal" })
+vim.keymap.set("n", "<leader>tr", "<cmd>TidalQuit<CR><cmd>TidalLaunch<CR>", { unique = true, desc = "restart tidal" })

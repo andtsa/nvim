@@ -22,7 +22,7 @@ return {
         -- 2) Configure mason-lspconfig (install required servers)
         local mason_lspconfig = require("mason-lspconfig")
         mason_lspconfig.setup({
-            ensure_installed       = { "lua_ls", "html", "jsonls", "pyright", "rust_analyzer", "r_language_server" },
+            ensure_installed       = { "lua_ls", "html", "jsonls", "pyright", "r_language_server" },
             automatic_installation = true,
             automatic_enable       = false, -- disable deprecated vim.lsp.enable() calls
         })
@@ -65,6 +65,7 @@ return {
 
         lspconfig.pyright.setup {}
 
+        lspconfig.texlab.setup {}
 
         -- 6) Global LspAttach hook for format-on-save & native inlay hints
         local attach_grp = vim.api.nvim_create_augroup("UserLspAttach", {})
