@@ -136,3 +136,14 @@ vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter" }, {
     group = cl_grp,
     callback = function() apply_coq_winhighlight(vim.api.nvim_get_current_win()) end,
 })
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = "kap",
+    callback = function()
+        vim.lsp.start({
+            name = "kap",
+            cmd = { "/Users/andtsa/uni/compconst/Group-1/target/debug/lsp" },
+            root_dir = vim.fn.getcwd(),
+        })
+    end
+})

@@ -87,6 +87,7 @@ vim.keymap.set("i", "<C-v>", '<Esc>"+pA', { noremap = true, unique = true, desc 
 vim.keymap.set({ "n", "v" }, "<D-c>", '"+y', { noremap = true, unique = true, desc = "copy to sys clipboard" })
 
 
+vim.keymap.set({ "v" }, "<Backspace>", "c")
 
 -- use natural wheel scrolling
 ------------------------------
@@ -111,14 +112,18 @@ vim.keymap.set("n", "<C-k>", "<C-u>", { noremap = true, silent = false, unique =
 
 -- moving between vsplit
 vim.keymap.set("n", "<leader>]", "<C-w>l", { noremap = true, unique = true, desc = "switch to right window" })
+vim.keymap.set("n", "<M-]>", "<C-w>l", { noremap = true, unique = true, desc = "switch to right window" })
 -- vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, unique = true, desc = "switch to right window" })
 vim.keymap.set("n", "<leader>[", "<C-w>h", { noremap = true, unique = true, desc = "switch to left window" })
+vim.keymap.set("n", "<M-[>", "<C-w>h", { noremap = true, unique = true, desc = "switch to left window" })
 -- vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, unique = true, desc = "switch to left window" })
 
 -- moving between split
 
 vim.keymap.set("n", "<leader>=", "<C-w>k", { noremap = true, unique = true, desc = "switch to up window" })
+vim.keymap.set("n", "<M-'>", "<C-w>k", { noremap = true, unique = true, desc = "switch to up window" })
 vim.keymap.set("n", "<leader>\\", "<C-w>j", { noremap = true, unique = true, desc = "switch to down window" })
+vim.keymap.set("n", "<M-\\>", "<C-w>j", { noremap = true, unique = true, desc = "switch to down window" })
 
 -- open terminal in current window
 vim.keymap.set("n", "T", "<cmd>terminal<CR>", { noremap = true, unique = true, desc = "make current window a terminal" })
@@ -336,6 +341,18 @@ vim.keymap.set("n", "<leader>l", function()
     vim.lsp.buf.format()
 end, { unique = true, desc = "lsp format" })
 
+vim.keymap.set("n", "<A-l>", function()
+    vim.lsp.buf.format()
+end, { unique = true, desc = "lsp format" })
+
+
+vim.keymap.set("n", "<leader>R", function()
+    vim.lsp.buf.references()
+end, { unique = true, desc = "usages of symbol under cursor" })
+
+vim.keymap.set("n", "<leader>tr", "<cmd>Telescope lsp_references<CR>",
+    { unique = true, desc = "usages of symbol under cursor" })
+
 -- not plugin. run fmt
 local fmt_opts = {
     silent  = false,
@@ -485,4 +502,4 @@ vim.keymap.set("n", "<leader>qp", "<cmd>QuartoPreview<CR>", { unique = true, des
 
 vim.keymap.set("n", "<leader>tl", "<cmd>TidalLaunch<CR>", { unique = true, desc = "launch tidal" })
 vim.keymap.set("n", "<leader>tq", "<cmd>TidalQuit<CR>", { unique = true, desc = "quit tidal" })
-vim.keymap.set("n", "<leader>tr", "<cmd>TidalQuit<CR><cmd>TidalLaunch<CR>", { unique = true, desc = "restart tidal" })
+-- vim.keymap.set("n", "<leader>tr", "<cmd>TidalQuit<CR><cmd>TidalLaunch<CR>", { unique = true, desc = "restart tidal" })

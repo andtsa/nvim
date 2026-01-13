@@ -21,12 +21,12 @@ vim.g.neovide_padding_left = 1
 -- vim.g.transparency = 0.8
 -- vim.g.neovide_background_color = "#0f1117" .. alpha()
 
-vim.g.neovide_opacity = 0.8
-vim.g.neovide_normal_opacity = 0.9
+vim.g.neovide_opacity = 0.7
+vim.g.neovide_normal_opacity = 0.8
 
-vim.g.neovide_window_blurred = true
-vim.g.neovide_floating_blur_amount_x = 5.0
-vim.g.neovide_floating_blur_amount_y = 5.0
+-- vim.g.neovide_window_blurred = true
+-- vim.g.neovide_floating_blur_amount_x = 4.0
+-- vim.g.neovide_floating_blur_amount_y = 4.0
 
 vim.g.neovide_show_border = false
 

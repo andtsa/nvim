@@ -8,6 +8,8 @@ return {
         "folke/todo-comments.nvim",
         "xiyaowong/telescope-emoji.nvim",
         "nvim-telescope/telescope-bibtex.nvim",
+        'nvim-lua/popup.nvim',
+        'nvim-telescope/telescope-media-files.nvim'
     },
     config = function()
         local telescope = require("telescope")
@@ -22,6 +24,8 @@ return {
                         ["<C-k>"] = actions.move_selection_previous, -- move to prev result
                         ["<C-j>"] = actions.move_selection_next,     -- move to next result
                         ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+                        ["<C-Y>"] = actions.preview_scrolling_up,
+                        ["<C-N>"] = actions.preview_scrolling_down,
                     },
                 },
             },
@@ -50,6 +54,7 @@ return {
         telescope.load_extension("emoji")
         telescope.load_extension("bibtex")
         telescope.load_extension("file_browser")
+        telescope.load_extension('media_files')
         -- telescope.load_extension('hoogle')
         --
 

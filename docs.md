@@ -2,7 +2,7 @@
 i often get lost
 
 
-
+https://deepwiki.com/nvim-telescope/telescope.nvim/2.1-picker-system
 
 
 ## Keymaps

@@ -32,6 +32,7 @@ return {
                 width = 24,
                 mappings = require("plugins.keymaps.neotree-keymaps")
             },
+
             sort_case_insensitive = true,
             popup_border_style = "rounded",
             file_size = {
@@ -78,7 +79,24 @@ return {
                     --               -- the current file is changed while the tree is open.
                     leave_dirs_open = true, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
                 },
-            }
+                window = {
+                    mappings = {
+                        ["o"] = "system_open",
+                        ["f"] = "telescope_ff",
+                    },
+                },
+            },
+            commands = {
+                system_open = function(state)
+                    local node = state.tree:get_node()
+                    local path = node:get_id()
+                    -- macOs: open file in default application in the background.
+                    vim.fn.jobstart({ "open", path }, { detach = true })
+                end,
+                telescope_ff = function()
+                    require("telescope.builtin").find_files()
+                end,
+            },
         })
     end,
 }

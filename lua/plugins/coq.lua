@@ -1,7 +1,7 @@
 return {
     'tomtomjhj/vscoq.nvim',
-    filetypes = 'coq',
-    dependecies = {
+    ft = 'coq',
+    dependencies = {
         'neovim/nvim-lspconfig',
         'whonore/Coqtail',
     },
