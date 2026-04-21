@@ -55,7 +55,7 @@ return {
                 "haskell",
                 "r",
                 "rnoweb",
-                "kap"
+                "sand"
             },
             incremental_selection = {
                 enable = true,
@@ -76,18 +76,18 @@ return {
 
         vim.filetype.add({
             extension = {
-                kap = "kap",
+                sand = "sand",
             },
         })
         local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
-        parser_config.kap = {
+        parser_config.sand = {
             install_info = {
-                url = "/Users/andtsa/uni/compconst/Group-1/demo/",
+                url = "/Users/andtsa/proj/sand/treesitter/",
                 files = { "src/parser.c" }, -- Note: add "src/scanner.c" if you create one later
                 branch = "main",
             },
-            filetype = "kap", -- The filetype Neovim will associate this parser with
+            filetype = "sand", -- The filetype Neovim will associate this parser with
         }
     end,
 }

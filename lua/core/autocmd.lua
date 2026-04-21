@@ -138,11 +138,11 @@ vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter" }, {
 })
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
-    pattern = "kap",
+    pattern = "sand",
     callback = function()
         vim.lsp.start({
-            name = "kap",
-            cmd = { "/Users/andtsa/uni/compconst/Group-1/target/debug/lsp" },
+            name = "sand",
+            cmd = { "/Users/andtsa/proj/sand/target/debug/lsp" },
             root_dir = vim.fn.getcwd(),
         })
     end

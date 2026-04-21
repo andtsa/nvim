@@ -4,7 +4,7 @@ return {
         require("mason-lspconfig").setup({
             ensure_installed       = { "html", "jsonls", "pyright", "rust_analyzer", "lua_ls" },
             automatic_installation = true,
-            automatic_enable       = false,
+            automatic_enable       = true,
         })
 
         -- require('mason-lspconfig').setup_handlers {
