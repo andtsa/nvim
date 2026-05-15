@@ -3,10 +3,12 @@ return {
     branch = "v3.x",
     dependencies = {
         "nvim-lua/plenary.nvim",
-        "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+        "nvim-tree/nvim-web-devicons",
         "MunifTanjim/nui.nvim",
-        -- "3rd/image.nvim", -- Optional image support in preview window:
-        -- See `# Preview Mode` for more information
+    },
+    keys = {
+        { "\\",         "<cmd>Neotree toggle<CR>",            desc = "Toggle file tree" },
+        { "<leader>gs", "<cmd>Neotree float git_status<CR>",  desc = "Git status (neotree)" },
     },
     config = function()
         -- If you want icons for diagnostic errors, you'll need to define them somewhere:
@@ -82,7 +84,7 @@ return {
                 window = {
                     mappings = {
                         ["o"] = "system_open",
-                        ["f"] = "telescope_ff",
+                        ["f"] = "fzf_files",
                     },
                 },
             },
@@ -90,11 +92,10 @@ return {
                 system_open = function(state)
                     local node = state.tree:get_node()
                     local path = node:get_id()
-                    -- macOs: open file in default application in the background.
                     vim.fn.jobstart({ "open", path }, { detach = true })
                 end,
-                telescope_ff = function()
-                    require("telescope.builtin").find_files()
+                fzf_files = function()
+                    require("fzf-lua").files()
                 end,
             },
         })
