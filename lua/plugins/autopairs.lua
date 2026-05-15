@@ -6,7 +6,7 @@ return {
     config = function()
         require("nvim-autopairs").setup({
             check_ts = true, -- enable treesitter
-            disable_filetype = { "TelescopePrompt", "vim" },
+            disable_filetype = { "vim" },
         })
 
         require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())

@@ -20,14 +20,11 @@ dashboard.section.header.opts = {
 
 -- Set menu
 dashboard.section.buttons.val = {
-    dashboard.button("q   ", "  > Quit vim", "<cmd>qa<CR>"),
-    -- dashboard.button("wr ", "  > Restore Session For Current Directory", "<cmd>SessionRestore<CR>"),
-    dashboard.button("`cd ", "  > Change directory", "<cmd>Telescope file_browser<cr>"),
-    dashboard.button("ff  ", "  > Find File", "<cmd>Telescope find_files<CR>"),
-    dashboard.button("fs  ", "  > Find Word", "<cmd>Telescope live_grep<CR>"),
-    dashboard.button("\\   ", "  > Toggle file explorer", "<cmd>Neotree toggle<CR>"),
-    dashboard.button("e   ", "  > New File", "<cmd>ene<CR>"),
-    dashboard.button("q   ", "  > Quit vim", "<cmd>qa<CR>"),
+    dashboard.button("ff  ", "  > Find File",      "<cmd>FzfLua files<CR>"),
+    dashboard.button("fs  ", "  > Find Word",      "<cmd>FzfLua live_grep<CR>"),
+    dashboard.button("\\   ", "  > File explorer", "<cmd>Neotree toggle<CR>"),
+    dashboard.button("e   ", "  > New File",       "<cmd>ene<CR>"),
+    dashboard.button("q   ", "  > Quit",           "<cmd>qa<CR>"),
 }
 
 dashboard.section.buttons.opts = {
